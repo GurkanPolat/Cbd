@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# " class="js fa-events-icons-ready" lang="fr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script type="text/javascript" async="" src="Git%20Cheat%20Sheet_files/analytics.js"></script><script type="text/javascript" async="" src="Git%20Cheat%20Sheet_files/js_002"></script><script async="" src="Git%20Cheat%20Sheet_files/js"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-40909700-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path"});</script>
+<meta name="description" content="Git Cheat Sheet : résumé des commandes de Git. Gestion des branches, des pull, des push, de l'historique, des logs, des repositories, des stash...">
+<link rel="canonical" href="https://www.julienkrier.fr/articles/git-cheat-sheet">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "TechArticle",
+            "name": "Git Cheat Sheet",
+            "headline": "Git Cheat Sheet",
+            "about": "Git",
+            "description": "On utilise souvent les mêmes commandes manuelles mais parfois on a besoin de faire des choses un peu plus inhabituelles. Voici un résumé des commandes les plus utilisées.",
+            "image": {
+                "@type": "ImageObject",
+                "representativeOfPage": "True",
+                "url": "https://www.julienkrier.fr/sites/default/files/styles/detail_article/public/2020-06/1024px-Git-logo.svg__0.png?itok=nJKqhiyt"
+            },
+            "datePublished": "sam 20/03/2021 - 15:58",
+            "isAccessibleForFree": "True",
+            "author": {
+                "@type": "Person",
+                "@id": "@julienkrier",
+                "name": "Julien Krier",
+                "url": "https://www.julienkrier.fr",
+                "sameAs": [
+                    "https://twitter.com/julienkrier",
+                    "https://www.linkedin.com/in/krierjulien/"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "@id": "@julienkrier",
+                "name": "Julien Krier",
+                "url": "https://www.julienkrier.fr"
+            }
+        },
+        {
+            "@type": "Person",
+            "name": "Krier",
+            "url": "https://www.julienkrier.fr",
+            "jobTitle": "Responsable Digital",
+            "description": "Julien Krier est Responsable Digital chez Martin Media. Avec plus de 20 ans d\u0027expérience dans les technologies web et l\u0027informatique, il gère un portefeuille de plateformes web et de sites e-commerce à fort trafic.",
+            "worksFor": {
+                "@id": "www.martinmedia.fr",
+                "name": "Martin Media"
+            }
+        },
+        {
+            "@type": "WebSite",
+            "@id": "www.julienkrier.fr",
+            "name": "Julien Krier",
+            "url": "https://www.julienkrier.fr",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://www.julienkrier.fr/recherche?search_api_fulltext={search_term_string}",
+                    "actionPlatform": [
+                        "http://schema.org/DesktopWebPlatform",
+                        "http://schema.org/MobileWebPlatform"
+                    ],
+                    "inLanguage": "fr"
+                },
+                "query": "https://www.julienkrier.fr/recherche?search_api_fulltext={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+    ]
+}</script>
+<link rel="icon" href="https://www.julienkrier.fr/sites/default/files/favicon.ico" type="image/vnd.microsoft.icon">
+<script>window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overlays=[];a2a_config.templates={};</script>
+
+    <title>Git Cheat Sheet</title>
+    <link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/css_gERgQC9LPyy4Qts_Mg7hgK6cl5Lg_L6S9EWr5E9zakQ.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/css_-Jv-COR1GkRekD2SzsrYTZe4yL0PI5uuKhIt2v0x4AY.css">
+<link rel="stylesheet" media="print" href="Git%20Cheat%20Sheet_files/css_hE9bobTN-h8QOZ8kign6WqdEQttTwYVzILn1_f9Wz6s.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/bootstrap.min.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/css_PxhC_WIZJxySAZXKic2y_z0JhVlDvCKvHTRoWSHi9TM.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/messages.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/css_ya3cUEC3SzNZ64d50NLlKQ2LRDU960BIL-Cm4EUMCE8.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/css_002.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/css_004.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/css_003.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/css.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/color-gray.css">
+<link rel="stylesheet" media="all" href="Git%20Cheat%20Sheet_files/css_47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU.css">
+
+    
+  <link href="Git%20Cheat%20Sheet_files/f479fb1064.css" media="all" rel="stylesheet"><script src="Git%20Cheat%20Sheet_files/core.ae8c9494.js" type="module"></script><style type="text/css">.a2a_hide{display:none}.a2a_logo_color{background-color:#0166ff}.a2a_menu,.a2a_menu *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;float:none;margin:0;padding:0;position:static;height:auto;width:auto}.a2a_menu{border-radius:6px;display:none;direction:ltr;background:#FFF;font:16px sans-serif-light,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,Helvetica,"Liberation Sans",sans-serif;color:#000;line-height:12px;border:1px solid #CCC;vertical-align:baseline;overflow:hidden}.a2a_mini{min-width:200px;position:absolute;width:300px;z-index:9999997}.a2a_overlay{display:none;background:#616c7deb;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);position:fixed;top:0;right:0;left:0;bottom:0;z-index:9999998;-webkit-tap-highlight-color:transparent;transition:opacity .14s,backdrop-filter .14s}.a2a_full{background:#FFF;border:1px solid #FFF;box-shadow:#2a2a2a1a 0 0 20px 10px;height:auto;height:calc(320px);top:15%;left:50%;margin-left:-320px;position:fixed;text-align:center;width:640px;z-index:9999999;transition:transform .14s,opacity .14s}.a2a_full_footer,.a2a_full_header,.a2a_full_services{border:0;margin:0;padding:12px;box-sizing:border-box}.a2a_full_header{padding-bottom:8px}.a2a_full_services{height:280px;overflow-y:scroll;padding:0 12px;-webkit-overflow-scrolling:touch}.a2a_full_services .a2a_i{display:inline-block;float:none;width:181px;width:calc(33.334% - 18px)}div.a2a_full_footer{font-size:12px;text-align:center;padding:8px 14px}div.a2a_full_footer a,div.a2a_full_footer a:visited{display:inline;font-size:12px;line-height:14px;padding:8px 14px}div.a2a_full_footer a:focus,div.a2a_full_footer a:hover{background:0 0;border:0;color:#0166FF}div.a2a_full_footer a span.a2a_s_a2a,div.a2a_full_footer a span.a2a_w_a2a{background-size:14px;border-radius:3px;display:inline-block;height:14px;line-height:14px;margin:0 3px 0 0;vertical-align:top;width:14px}.a2a_modal{height:0;left:50%;margin-left:-320px;position:fixed;text-align:center;top:15%;width:640px;z-index:9999999;transition:transform .14s,opacity .14s;-webkit-tap-highlight-color:transparent}.a2a_modal_body{background:0 0;border:0;font:24px sans-serif-light,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,Helvetica,"Liberation Sans",sans-serif;position:relative;height:auto;width:auto}.a2a_thanks{color:#fff;height:auto;margin-top:20px;width:auto}.a2a_thanks>div:first-child{margin:0 0 40px 0}.a2a_thanks div *{height:inherit}#a2a_copy_link{background:#FFF;border:1px solid #FFF;cursor:pointer;margin-top:15%}span.a2a_s_link#a2a_copy_link_icon,span.a2a_w_link#a2a_copy_link_icon{background-size:48px;border-radius:0;display:inline-block;height:48px;left:0;line-height:48px;margin:0 3px 0 0;position:absolute;vertical-align:top;width:48px}#a2a_modal input#a2a_copy_link_text{background-color:transparent;border:0;color:#2A2A2A;cursor:pointer;font:inherit;height:48px;left:62px;max-width:initial;min-height:auto;padding:0;position:relative;width:564px;width:calc(100% - 76px)}#a2a_copy_link_copied{background-color:#0166ff;color:#fff;display:none;font:inherit;font-size:16px;margin-top:1px;padding:3px 8px}@media (prefers-color-scheme:dark){.a2a_menu a,.a2a_menu a.a2a_i,.a2a_menu a.a2a_i:visited,.a2a_menu a.a2a_more,i.a2a_i{border-color:#2a2a2a!important;color:#fff!important}.a2a_menu a.a2a_i:active,.a2a_menu a.a2a_i:focus,.a2a_menu a.a2a_i:hover,.a2a_menu a.a2a_more:active,.a2a_menu a.a2a_more:focus,.a2a_menu a.a2a_more:hover,.a2a_menu_find_container{border-color:#444!important;background-color:#444!important}.a2a_menu:not(.a2a_thanks){background-color:#2a2a2a;border-color:#2a2a2a}.a2a_menu_find{color:#fff!important}.a2a_menu span.a2a_s_find svg{background-color:transparent!important}.a2a_menu span.a2a_s_find svg path{fill:#fff!important}.a2a_full{box-shadow:#00000066 0 0 20px 10px}.a2a_overlay{background-color:#373737eb}}@media print{.a2a_floating_style,.a2a_menu,.a2a_overlay{visibility:hidden}}@keyframes a2aFadeIn{from{opacity:0}to{opacity:1}}.a2a_starting{opacity:0}.a2a_starting.a2a_full,.a2a_starting.a2a_modal{transform:scale(.8)}@media (max-width:639px){.a2a_full{border-radius:0;top:15%;left:0;margin-left:auto;width:100%}.a2a_modal{left:0;margin-left:10px;width:calc(100% - 20px)}}@media (min-width:318px) and (max-width:437px){.a2a_full .a2a_full_services .a2a_i{width:calc(50% - 18px)}}@media (max-width:317px){.a2a_full .a2a_full_services .a2a_i{width:calc(100% - 18px)}}@media (max-height:436px){.a2a_full{bottom:40px;height:auto;top:40px}}@media (max-height:550px){.a2a_modal{top:30px}}@media (max-height:360px){.a2a_modal{top:20px}.a2a_thanks>div:first-child{margin-bottom:20px}}.a2a_menu a{color:#0166FF;text-decoration:none;font:16px sans-serif-light,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,Helvetica,"Liberation Sans",sans-serif;line-height:14px;height:auto;width:auto;outline:0}.a2a_menu a.a2a_i:visited,.a2a_menu a.a2a_more{color:#0166FF}.a2a_menu a.a2a_i:active,.a2a_menu a.a2a_i:focus,.a2a_menu a.a2a_i:hover,.a2a_menu a.a2a_more:active,.a2a_menu a.a2a_more:focus,.a2a_menu a.a2a_more:hover{color:#2A2A2A;border-color:#EEE;border-style:solid;background-color:#EEE;text-decoration:none}.a2a_menu span.a2a_s_find{background-size:24px;height:24px;left:8px;position:absolute;top:7px;width:24px}.a2a_menu span.a2a_s_find svg{background-color:#FFF}.a2a_menu span.a2a_s_find svg path{fill:#CCC}#a2a_menu_container{display:inline-block}.a2a_menu_find_container{border:1px solid #CCC;border-radius:6px;padding:2px 24px 2px 0;position:relative;text-align:left}.a2a_cols_container .a2a_col1{overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}#a2a_modal input,#a2a_modal input[type=text],.a2a_menu input,.a2a_menu input[type=text]{display:block;background-image:none;box-shadow:none;line-height:100%;margin:0;outline:0;overflow:hidden;padding:0;-moz-box-shadow:none;-webkit-box-shadow:none;-webkit-appearance:none}#a2afeed_find_container input,#a2afeed_find_container input[type=text],#a2apage_find_container input,#a2apage_find_container input[type=text]{background-color:transparent;border:0;box-sizing:content-box;color:#2A2A2A;font:inherit;font-size:16px;height:28px;line-height:20px;left:38px;outline:0;margin:0;max-width:initial;min-height:initial;padding:2px 0;position:relative;width:99%}.a2a_clear{clear:both}.a2a_svg{background-repeat:no-repeat;display:block;overflow:hidden;height:32px;line-height:32px;padding:0;pointer-events:none;width:32px}.a2a_svg svg{background-repeat:no-repeat;background-position:50% 50%;border:none;display:block;left:0;margin:0 auto;overflow:hidden;padding:0;position:relative;top:0;width:auto;height:auto}a.a2a_i,i.a2a_i{display:block;float:left;border:1px solid #FFF;line-height:24px;padding:6px 8px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:132px}a.a2a_i span,a.a2a_more span{display:inline-block;overflow:hidden;vertical-align:top}a.a2a_i .a2a_svg{margin:0 6px 0 0}a.a2a_i .a2a_svg,a.a2a_more .a2a_svg{background-size:24px;height:24px;line-height:24px;width:24px}a.a2a_sss:hover{border-left:1px solid #CCC}a.a2a_more{border-bottom:1px solid #FFF;border-left:0;border-right:0;line-height:24px;margin:6px 0 0;padding:6px;-webkit-touch-callout:none}a.a2a_more span{height:24px;margin:0 6px 0 0}.a2a_kit .a2a_svg{background-repeat:repeat}.a2a_default_style a:empty,.a2a_flex_style a:empty,.a2a_floating_style a:empty,.a2a_overlay_style a:empty{display:none}.a2a_color_buttons a,.a2a_floating_style a{text-decoration:none}.a2a_default_style:not(.a2a_flex_style) a{float:left;line-height:16px;padding:0 2px}.a2a_default_style a:hover .a2a_svg,.a2a_floating_style a:hover .a2a_svg,.a2a_overlay_style a:hover .a2a_svg svg{opacity:.7}.a2a_overlay_style.a2a_default_style a:hover .a2a_svg{opacity:1}.a2a_default_style .a2a_count,.a2a_default_style .a2a_svg,.a2a_floating_style .a2a_svg,.a2a_menu .a2a_svg,.a2a_vertical_style .a2a_count,.a2a_vertical_style .a2a_svg{border-radius:4px}.a2a_default_style .a2a_counter img,.a2a_default_style .a2a_dd,.a2a_default_style .a2a_svg{float:left}.a2a_default_style .a2a_img_text{margin-right:4px}.a2a_default_style .a2a_divider{border-left:1px solid #000;display:inline;float:left;height:16px;line-height:16px;margin:0 5px}.a2a_kit a{cursor:pointer;transition:none}.a2a_floating_style{background-color:#fff;border-radius:6px;position:fixed;z-index:9999995}.a2a_overlay_style{z-index:2147483647}.a2a_floating_style,.a2a_overlay_style{animation:a2aFadeIn .2s ease-in;padding:4px}.a2a_vertical_style:not(.a2a_flex_style) a{clear:left;display:block;overflow:hidden;padding:4px}.a2a_floating_style.a2a_default_style{bottom:0}.a2a_floating_style.a2a_default_style a,.a2a_overlay_style.a2a_default_style a{padding:4px}.a2a_count{background-color:#fff;border:1px solid #ccc;box-sizing:border-box;color:#2a2a2a;display:block;float:left;font:12px Arial,Helvetica,sans-serif;height:16px;margin-left:4px;position:relative;text-align:center;width:50px}.a2a_count:after,.a2a_count:before{border:solid transparent;border-width:4px 4px 4px 0;content:"";height:0;left:0;line-height:0;margin:-4px 0 0 -4px;position:absolute;top:50%;width:0}.a2a_count:before{border-right-color:#ccc}.a2a_count:after{border-right-color:#fff;margin-left:-3px}.a2a_count span{animation:a2aFadeIn .14s ease-in}.a2a_vertical_style .a2a_counter img{display:block}.a2a_vertical_style .a2a_count{float:none;margin-left:0;margin-top:6px}.a2a_vertical_style .a2a_count:after,.a2a_vertical_style .a2a_count:before{border:solid transparent;border-width:0 4px 4px 4px;content:"";height:0;left:50%;line-height:0;margin:-4px 0 0 -4px;position:absolute;top:0;width:0}.a2a_vertical_style .a2a_count:before{border-bottom-color:#ccc}.a2a_vertical_style .a2a_count:after{border-bottom-color:#fff;margin-top:-3px}.a2a_color_buttons .a2a_count,.a2a_color_buttons .a2a_count:after,.a2a_color_buttons .a2a_count:before,.a2a_color_buttons.a2a_vertical_style .a2a_count:after,.a2a_color_buttons.a2a_vertical_style .a2a_count:before{background-color:transparent;border:none;color:#fff;float:none;width:auto}.a2a_color_buttons.a2a_vertical_style .a2a_count{margin-top:0}.a2a_flex_style{display:flex;align-items:flex-start;gap:0}.a2a_default_style.a2a_flex_style{left:0;right:0;width:100%}.a2a_vertical_style.a2a_flex_style{flex-direction:column;top:0;bottom:0}.a2a_flex_style a{display:flex;justify-content:center;flex:1;padding:4px}.a2a_flex_style.a2a_vertical_style a{flex-direction:column}.a2a_floating_style.a2a_color_buttons,.a2a_floating_style.a2a_flex_style{border-radius:0;padding:0}.a2a_floating_style.a2a_default_style.a2a_flex_style{bottom:0}.a2a_kit.a2a_flex_style .a2a_counter img,.a2a_kit.a2a_flex_style .a2a_dd,.a2a_kit.a2a_flex_style .a2a_svg{float:none}.a2a_nowrap{white-space:nowrap}.a2a_note{margin:0 auto;padding:9px;font-size:12px;text-align:center}.a2a_note .a2a_note_note{margin:0;color:#2A2A2A}.a2a_wide a{display:block;margin-top:3px;border-top:1px solid #EEE;text-align:center}.a2a_label{position:absolute!important;clip-path:polygon(0px 0px,0px 0px,0px 0px);-webkit-clip-path:polygon(0px 0px,0px 0px,0px 0px);overflow:hidden;height:1px;width:1px}.a2a_kit,.a2a_menu,.a2a_modal,.a2a_overlay{-ms-touch-action:manipulation;touch-action:manipulation;outline:0}.a2a_dd{-webkit-user-drag:none}.a2a_dd img{border:0}.a2a_button_facebook_like iframe{max-width:none}</style><meta http-equiv="origin-trial" content="AymqwRC7u88Y4JPvfIF2F37QKylC04248hLCdJAsh8xgOfe/dVJPV3XS3wLFca1ZMVOtnBfVjaCMTVudWM//5g4AAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1RoaXJkUGFydHkiOnRydWV9"></head>
+  <body class="layout-no-sidebars wide hff-08 pff-06 sff-08 slff-08 headings-wide-spacing-enabled fixed-header-enabled slideout-side-left transparent-header-active path-node page-node-type-article">
+        <a href="#main-content" class="visually-hidden focusable skip-link">
+      Aller au contenu principal
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+<div class="page-container">
+
+          <div class="header-container">
+
+      
+      
+                      <div class="sticky-wrapper" style=""><header role="banner" class="clearfix header region--dark-typography region--gray-background full-width two-columns" style="top: 0px;">
+          <div class="container-fluid">
+                        <div class="clearfix header__container">
+              <div class="row">
+                                                  <div class="col-md-4">
+                                        <div class="clearfix header__section header-first">
+                        <div class="region region-header-first">
+    <div id="block-julienk-branding" class="clearfix site-branding block block-system block-system-branding-block">
+  
+    
+    <div class="logo-and-site-name-wrapper clearfix">
+              <div class="site-name site-branding__name">
+        <a href="https://www.julienkrier.fr/" title="Home" rel="home">Julien Krier</a>
+      </div>
+              <div class="site-slogan site-branding__slogan">Responsable Digital</div>
+      </div>
+</div>
+
+  </div>
+
+                    </div>
+                                      </div>
+                                                  <div class="col-md-8">
+                                        <div class="clearfix header__section header-second">
+                        <div class="region region-header">
+    <div id="block-mainnavigation" class="clearfix block block-superfish block-superfishmain">
+  
+    
+      <div class="content">
+      
+<ul id="superfish-main" class="menu sf-menu sf-main sf-horizontal sf-style-none sf-js-enabled sf-shadow">
+  
+<li id="main-menu-link-contentdcf18d5a-4a8d-4ea8-a144-3050d7f76ab9" class="sf-depth-1 sf-no-children"><a href="https://www.julienkrier.fr/competences" class="sf-depth-1">Compétences</a></li><li id="main-menu-link-contentd24cdd5a-0278-4f5e-880e-72c65f724b24" class="sf-depth-1 sf-no-children"><a href="https://www.julienkrier.fr/experiences" class="sf-depth-1">Expériences</a></li><li id="main-menu-link-content9708f432-ad2c-443b-a570-b65d816e82fe" class="sf-depth-1 sf-no-children"><a href="https://www.julienkrier.fr/realisations" class="sf-depth-1">Réalisations</a></li><li id="main-menu-link-content009a7108-fbea-4ec5-a37b-a92173e3933b" class="sf-depth-1 sf-no-children"><a href="https://www.julienkrier.fr/articles" title="Articles sur le développement informatique" class="sf-depth-1">Articles</a></li><li id="main-menu-link-contentbbdd669e-efa0-4d19-b363-f2643f06ceda" class="sf-depth-1 sf-no-children"><a href="https://www.julienkrier.fr/memo" title="Les mémos" class="sf-depth-1">Mémo</a></li>
+</ul>
+
+    </div>
+  </div>
+
+  </div>
+
+                    </div>
+                                      </div>
+                              </div>
+            </div>
+                      </div>
+                  </header></div>
+              
+    </div>
+      
+          <div class="clearfix banner  region--dark-typography region--gray-background region--no-block-paddings region--no-paddings">
+      <div class="container-fluid">
+                <div class="clearfix banner__container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="banner__section">
+                  <div class="region region-banner">
+    <div id="block-julienk-breadcrumbs" class="clearfix block block-system block-system-breadcrumb-block">
+  
+    
+      <div class="content">
+      
+  <nav class="breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">
+    <span id="system-breadcrumb" class="visually-hidden">Fil d'Ariane</span>
+    <ol class="breadcrumb__items">
+          <li class="breadcrumb__item">
+        <span class="breadcrumb__item-separator fa fa-angle-right"></span>
+                  <a href="https://www.julienkrier.fr/">
+            <span>Home</span>
+          </a>
+              </li>
+          <li class="breadcrumb__item">
+        <span class="breadcrumb__item-separator fa fa-angle-right"></span>
+                  <a href="https://www.julienkrier.fr/articles">
+            <span>Articles</span>
+          </a>
+              </li>
+          <li class="breadcrumb__item">
+        <span class="breadcrumb__item-separator fa fa-angle-right"></span>
+                  <span>Git Cheat Sheet</span>
+              </li>
+        </ol>
+  </nav>
+
+    </div>
+  </div>
+
+  </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+              </div>
+    </div>
+      
+    <div id="page-start" class="clearfix page-start"></div>
+
+      <div class="system-messages clearfix">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+              <div class="region region-system-messages">
+    <div data-drupal-messages-fallback="" class="hidden"></div>
+
+  </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+  
+    <div class="clearfix main-content region--dark-typography region--white-background  region--no-separator ">
+    <div class="container">
+      <div class="clearfix main-content__container">
+        <div class="row">
+          <section class="col-md-12">
+                        <div class="clearfix main-content__section">
+                                <div class="region region-content">
+    <div id="block-julienk-page-title" class="clearfix block block-core block-page-title-block">
+  
+    
+      <div class="content">
+      
+  <h1 class="title page-title">Git Cheat Sheet <img src="Git%20Cheat%20Sheet_files/1024px-Git-logo.svg__0.png"></h1>
+
+
+    </div>
+  </div>
+<div id="block-julienk-content" class="clearfix block block-system block-system-main-block">
+  
+    
+      <div class="content">
+      
+
+<article data-history-node-id="12" role="article" about="/articles/git-cheat-sheet" typeof="schema:Article" class="category-memo node node--type-article node--promoted node--view-mode-full clearfix">
+  <div class="node__container">
+    <div class="node__main-content clearfix">
+      <header class="node__header">
+        
+  
+      <span property="schema:name" content="Git Cheat Sheet" class="rdf-meta hidden"></span>
+  <span property="schema:interactionCount" content="UserComments:0" class="rdf-meta hidden"></span>
+
+      <article typeof="schema:Person" about="/user/67" class="profile">
+  
+            <div class="field field--name-user-picture field--type-image field--label-hidden field__item">  <a href="https://www.julienkrier.fr/user/67" hreflang="fr"><img loading="lazy" src="Git%20Cheat%20Sheet_files/profile300.jpg" alt="Profile picture for user Julien Krier" typeof="foaf:Image" class="image-style-thumbnail" width="100" height="100">
+
+</a>
+</div>
+      </article>
+
+        <div class="node__meta">
+       <ul class="inline-list">
+                      <li class="inline-list__item">
+                              <span class="node__submitted-info">
+                  <span class="node__submitted-date">
+                    Écrit le 20 mars 2021
+                  </span>
+                  <span class="node__submitted-info-text">par</span> <span rel="schema:author" class="field field--name-uid field--type-entity-reference field--label-hidden"><span about="/user/67" typeof="schema:Person" property="schema:name" datatype="" lang="">Julien Krier</span></span>
+                </span>
+                                  <span property="schema:dateCreated" content="2021-03-20T14:58:46+00:00" class="rdf-meta hidden"></span>
+
+                                                          | <span class="">
+                                                         Mémo
+                </span>
+                          </li>
+                        </ul>
+    </div>
+        </header>
+        
+  <div class="node__main-content-section">
+
+        
+    
+            <div class="clearfix text-formatted field field--name-field-description field--type-text-long field--label-hidden field__item"><div class="row orange">
+<div class="col-md-6">
+<h2>Commandes de base</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git init</code></div>
+
+<div class="col-md-9">Crée un dépôt Git vide dans le répertoire spécifié. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git clone (repo)</code></div>
+
+<div class="col-md-9">Clone le dépôt situé à (repo) sur la machine 
+locale. Le dépôt d'origine peut être situé sur le système de fichiers 
+local ou sur une machine distante via HTTP ou SSH. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git config user.name (name)</code></div>
+
+<div class="col-md-9">Définit le nom de l'auteur à utiliser pour toutes 
+les validations dans le référentiel actuel. On utilise l'option --global
+ pour définir les options de configuration de l'utilisateur actuel.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git add (directory)</code></div>
+
+<div class="col-md-9">Ajoute (directory) pour la prochaine validation. 
+On peut aussi ajouter un fichier ou tous les fichiers qui ne sont pas 
+encore connus avec le joker (.). <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git rm (file/directory) --cached</code></div>
+
+<div class="col-md-9">Supprime un file du repository avec l'option 
+--cached. Attention sans cette option cela supprime le fichier du 
+filesystem. L'option -r permet d'agir de façon recursive sur des 
+répertoires.<span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git commit -m "(message)"</code></div>
+
+<div class="col-md-9">Valide l'état actuel des modifications dans un "commit". On remplace (message) par la description des modifications. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git status</code></div>
+
+<div class="col-md-9">Liste l'état du projet locale : les fichiers 
+modifiés prêt à être "commités" (staged), les fichiers modifiés non 
+ajoutés (not staged), les fichiers non suivi (untracked). <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git log</code></div>
+
+<div class="col-md-9">Affiche l'intégralité de l'historique des validations (commit).</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git diff</code></div>
+
+<div class="col-md-9">Affiche les modifications non enregistrées entre l'index local et le répertoire de travail. A utiliser avant commit. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<h2>Annuler des changements</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git revert (commit)</code></div>
+
+<div class="col-md-9">Crée un nouveau commit qui annule toutes les 
+modifications apportées dans (commit), puis l'applique à la branche 
+actuelle. Attention cela supprime les modifications mais aussi les 
+fichiers qui ont été ajoutés (le fichier est supprimé).</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git reset (file)</code></div>
+
+<div class="col-md-9">Supprime (file) de la zone de préparation avant 
+"commit", mais laisse le répertoire de travail inchangé. Cela désactive 
+un fichier "staged" pour le passer dans "unstaged" sans écraser les 
+modifications. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git clean -n</code></div>
+
+<div class="col-md-9">Affiche les fichiers qui seraient supprimés du 
+répertoire de travail. Utilisez l'indicateur -f à la place de 
+l'indicateur -n pour exécuter le nettoyage.</div>
+</div>
+
+<h2>La configuration de Git</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git config --global user.name (name)</code></div>
+
+<div class="col-md-9">Définit le nom de l'auteur à utiliser pour toutes les validations de l'utilisateur actuel.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git config --global user.email (email)</code></div>
+
+<div class="col-md-9">Définit l'adresse e-mail de l'auteur à utiliser pour toutes les validations de l'utilisateur actuel.</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git config --global alias. (alias-name) (git-command)</code></div>
+
+<div class="col-md-9">Crée un raccourci pour une commande Git. Par 
+exemple : alias.glog "log --graph --oneline" définit "git glog" 
+équivalent à "git log --graph --oneline. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git config --system core.editor (editor)</code></div>
+
+<div class="col-md-9">Définit l'éditeur de texte utilisé par les 
+commandes pour tous les utilisateurs de la machine. (editor) doit être 
+la commande qui lance l'éditeur souhaité (par exemple, vi).</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git config --global --edit</code></div>
+
+<div class="col-md-9">Ouvre le fichier de configuration globale dans un éditeur de texte pour une édition manuelle.</div>
+</div>
+
+<h2>Le journal Git (Logs)</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git log -(limit)</code></div>
+
+<div class="col-md-9">Limiter le nombre de commits par (limit). Par exemple : "git log -5" sera limité à 5 commits. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git log --oneline</code></div>
+
+<div class="col-md-9">Condense chaque commit sur une seule ligne. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git log -p</code></div>
+
+<div class="col-md-9">Affiche la différence complète de chaque commit. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git log --stat</code></div>
+
+<div class="col-md-9">Inclue les fichiers modifiés et le nombre relatif de lignes qui ont été ajoutées ou supprimées de chacun d'eux.</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git log --author= "(pattern)"</code></div>
+
+<div class="col-md-9">Recherche les commits d'un auteur particulier. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git log --grep="(pattern)"</code></div>
+
+<div class="col-md-9">Recherche des validations avec un message de validation qui correspond à (pattern). <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git log (since)..(until)</code></div>
+
+<div class="col-md-9">Affiche les validations qui se produisent entre 
+(since) et (until). Les arguments peuvent être un ID de validation, un 
+nom de branche, HEAD ou tout autre type de référence de révision.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git log -- (file)</code></div>
+
+<div class="col-md-9">Affiche uniquement les commits contenant le fichier spécifié. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git log --graph --decorate</code></div>
+
+<div class="col-md-9">--graph flag dessine un graphique basé sur du 
+texte des commits sur le côté gauche des msgs de commit. --decorate 
+ajoute des noms de branches ou des balises de commits affichés.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git blame myfile</code></div>
+
+<div class="col-md-9">Affiche qui et quand a modifié le fichier (myfile).</div>
+</div>
+
+<h2>Étiquetage : GIT TAG</h2>
+
+<div class="row">
+<div class="col-md-3"><b><code>git tag</code></b></div>
+
+<div class="col-md-9">Liste tous les tags. Option -l permet de rechercher dans les tags : <code>git tag -l 'v1.8.5*'</code>.<span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git tag -a (tag) -m 'ma version 1.2'</code></div>
+
+<div class="col-md-9">Ajoute le tag (tag) avec le message associé. (Peut aussi être utilisé sous la forme légère : <code>git tag v1.4-lg</code>)<br>
+On peut étiqueter un commit de cette façon <code>git tag -a v1.2 9fceb02</code>.</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git show (tag)</code></div>
+
+<div class="col-md-9">Affiche le (tag) et les informations associées.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git push --tags</code><br><code>git pull --tags</code></div>
+
+<div class="col-md-9">Pousse/Récupère tous les tags sur ou du le repo. Pour pousser 1 seul tag : <code>git push origin v1.5</code>.</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git tag -d v1.4-lw</code></div>
+
+<div class="col-md-9">Supprime un tag en local.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git push (repo) --delete (tag)</code></div>
+
+<div class="col-md-9">Supprime un (tag) sur le (repo).</div>
+</div>
+
+<h2>Les états : GIT STASH</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git stash</code></div>
+
+<div class="col-md-9">Sauve l'état des modifications. Pour mettre un nom sous cet état on utilise <code>git stash save "stash name" &amp;&amp; git stash</code>.<span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git stash pop</code></div>
+
+<div class="col-md-9">Récupère l'état des modifications. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git stash list</code></div>
+
+<div class="col-md-9">Liste tous les états de modifications.</div>
+</div>
+</div>
+<!-- 2nd colonne -->
+
+<div class="col-md-6">
+<h2>Réécrire historique/log GIT</h2>
+
+<div class="row">
+<div class="col-md-3"><b><code>git commit --amend</code></b></div>
+
+<div class="col-md-9">Ajoute des fichiers "staged" au dernier commit. 
+Permet d'ajouter des oublis ou corrections dans un commit. Cela permet 
+également de modifier le message du commit si aucun fichier est 
+"staged". <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git rebase (base)</code></div>
+
+<div class="col-md-9">Rebase la branche actuelle sur (base). (base) peut
+ être un ID de commit, un nom de branche, une balise ou une référence 
+relative à HEAD. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git reflog</code></div>
+
+<div class="col-md-9">Affiche un journal des modifications apportées à 
+HEAD du référentiel local. Ajoutez le drapeau --relative-date pour 
+afficher les informations de date ou --all pour afficher toutes les 
+références. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<h2>GIT BRANCHES</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git branch</code></div>
+
+<div class="col-md-9">Répertoriez toutes les branches de votre repo. 
+Ajoutez un argument (branch) pour créer une nouvelle branche avec le nom
+ (branch). <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git branch -a</code></div>
+
+<div class="col-md-9">Liste toutes les branches locales et distantes</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git branch -m (newname)</code></div>
+
+<div class="col-md-9">Renome la branche courante avec le (newname)</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git branch -d (branch)</code></div>
+
+<div class="col-md-9">Supprime localement la branche (branch)</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git push origin :(branch)</code></div>
+
+<div class="col-md-9">Supprime la branche distante (branch)</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git checkout -b (branch)</code></div>
+
+<div class="col-md-9">Crée et se positionne sur une nouvelle branche 
+nommée (branch). Si on supprime l'indicateur -b, on se positionne sur 
+une branche existante. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git merge (branch)</code></div>
+
+<div class="col-md-9">Fusionne (branch) dans la branche actuelle.</div>
+</div>
+
+<h2>REMOTE REPOSITORIES</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git remote add (name) (url)</code></div>
+
+<div class="col-md-9">Crée une nouvelle connexion à un référentiel distant. <span aria-hidden="true" class="glyphicon glyphicon-star">&nbsp;</span></div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git fetch (remote) (branch)</code></div>
+
+<div class="col-md-9">Récupère une (branch) spécifique, à partir du dépôt. Laissez (branch) vide pour récupérer toutes les références distantes.</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git pull (remote)</code></div>
+
+<div class="col-md-9">Récupére la copie distante spécifiée de la branche actuelle et la fusionne dans la copie locale.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git push (remote) (branch)</code></div>
+
+<div class="col-md-9">Pousse la (branch) sur le repo (remote). Crée la branche nommée (branch) dans le référentiel distant si elle n'existe pas.</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git remote show (repo)</code></div>
+
+<div class="col-md-9">Liste les branches du (repo) et leurs mappings avec les branches locales.</div>
+</div>
+
+<h2>GIT DIFF</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git diff HEAD</code></div>
+
+<div class="col-md-9">Affiche la différence entre le répertoire de travail et le dernier commit.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git diff --cached</code></div>
+
+<div class="col-md-9">Affiche la différence entre les modifications par étapes et le dernier commit</div>
+</div>
+
+<h2>GIT RESET</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git reset</code></div>
+
+<div class="col-md-9">Réinitialise la zone de préparation pour qu'elle 
+corresponde à la validation la plus récente, mais laisse le répertoire 
+de travail inchangé.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git reset --hard</code></div>
+
+<div class="col-md-9">Réinitialise la zone de préparation et le 
+répertoire de travail pour correspondre à la validation la plus récente 
+et écrase toutes les modifications dans le répertoire de travail.</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git reset (commit)</code></div>
+
+<div class="col-md-9">Déplace le curseur de la branche actuelle vers 
+(commit), réinitialise la zone de préparation mais laisse le répertoire 
+de travail en l'état. Les fichiers et répertoires ne sont pas supprimés.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git reset --hard (commit)</code></div>
+
+<div class="col-md-9">Identique à la précédente, mais réinitialise à la 
+fois la zone de préparation et le répertoire de travail. Les fichiers et
+ répertoires sont supprimés.</div>
+</div>
+
+<h2>GIT REBASE</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git rebase -i (base)</code></div>
+
+<div class="col-md-9">Rebase interactivement la branche actuelle sur 
+(base). Lance l'éditeur pour entrer des commandes indiquant comment 
+chaque commit sera transféré vers la nouvelle base.</div>
+</div>
+
+<h2>GIT PULL</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git pull --rebase (remote)</code></div>
+
+<div class="col-md-9">Récupére la copie distante de la branche actuelle 
+et la rebase dans la copie locale. Utilise git rebase au lieu de merge 
+pour intégrer les branches.</div>
+</div>
+
+<h2>GIT PUSH</h2>
+
+<div class="row">
+<div class="col-md-3"><code>git push (remote) --force</code></div>
+
+<div class="col-md-9">Force le push même si cela entraîne une fusion non
+ rapide. N'utilisez pas l'indicateur --force, sauf si vous êtes 
+absolument sûr de savoir ce que vous faites.</div>
+</div>
+
+<div class="row grey">
+<div class="col-md-3"><code>git push (remote) --all</code></div>
+
+<div class="col-md-9">Pousse toutes les branches locales vers le repo spécifié.</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"><code>git push (remote) --tags</code></div>
+
+<div class="col-md-9">Les balises ne sont pas automatiquement envoyées 
+lorsque vous poussez une branche ou utilisez le --all. L'indicateur 
+--tags envoie toutes vos balises locales au référentiel distant.</div>
+</div>
+</div>
+</div>
+</div>
+      
+      <div class="field field--name-field-code-source field--type-entity-reference-revisions field--label-hidden field__items">
+              <div class="field__item">  <div class="paragraph paragraph--type--article-source paragraph--view-mode--default">
+          
+  <div class="field field--name-field-source field--type-link field--label-inline clearfix">
+    <div class="field__label">Source</div>
+          <div class="field__items">
+              <div class="field__item"><a href="https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet">https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet</a></div>
+          <div class="field__item"><a href="https://gitsheet.wtf/">https://gitsheet.wtf/</a></div>
+          <div class="field__item"><a href="https://git-scm.com/book/fr/v2">https://git-scm.com/book/fr/v2</a></div>
+              </div>
+      </div>
+
+      </div>
+</div>
+          </div>
+        <div class="field field--name-field-tags field--type-entity-reference field--label-hidden field--entity-reference-target-type-taxonomy-term clearfix field__items">
+              <div class="field__item"><a href="https://www.julienkrier.fr/mots-cles/git" property="schema:about" hreflang="fr">Git</a></div>
+          </div>
+  
+<div id="user-bar">
+      
+<div class="col-md-7 col-lg-8">
+        <div class="field field--name-field-block-auteur field--type-entity-reference field--label-above field--entity-reference-target-type-block-content clearfix">
+    <div class="field__label">L'auteur de cet article</div>
+              <div class="field__item">
+            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"><div class="row">
+<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3"><img alt="Julien Krier" class="img-circle img-thumbnail img-responsive img-profile" src="Git%20Cheat%20Sheet_files/profile300_0.jpg" width="160" height="160"></div>
+
+<div class="col-lg-10 col-md-9 col-sm-9 col-xs-8"><a href="https://www.julienkrier.fr/experiences/responsable-digital" title="Responsable Digital chez Martin Media">Responsable Digital</a>,
+ ayant occupé différents postes en informatique depuis 2001, Julien 
+Krier a travaillé sur de multiples plateformes, sites de contenu ou 
+e-commerce à fort trafic. Il est spécialisé dans les technologies web 
+sur les <a href="https://www.julienkrier.fr/competences" title="Compétences sur les CMS">CMS</a> comme <a href="https://www.julienkrier.fr/mots-cles/drupal" title="CMS Drupal">Drupal</a> et les <a href="https://www.julienkrier.fr/competences" title="Compétences sur les Framework">Framework</a> <a href="https://www.julienkrier.fr/mots-cles/php" title="Langage Php">Php</a> comme <a href="https://www.julienkrier.fr/mots-cles/symfony" title="Framework Symfony">Symfony</a>.</div>
+</div>
+</div>
+      </div>
+          </div>
+
+  </div>
+
+<div class="col-xs-6 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-0 col-lg-2">
+      
+  <div class="field field--name-field-fivestar field--type-fivestar field--label-above">
+    <div class="field__label">Cet article vous a aidé?</div>
+              <div class="field__item"><form class="fivestar-form-1" id="vote" data-drupal-selector="fivestar-form-1" action="/articles/git-cheat-sheet" method="post" accept-charset="UTF-8">
+  <div class="clearfix fivestar-average-text fivestar-average-stars fivestar-form-item fivestar-oxygen"><div class="js-form-item form-item js-form-type-fivestar form-type-fivestar js-form-item-vote form-item-vote form-no-label">
+        <div class="js-form-item form-item js-form-type-select form-type-select js-form-item-vote form-item-vote form-no-label">
+        <select class="vote form-select" data-drupal-selector="edit-vote" aria-describedby="edit-vote--2--description" id="edit-vote--2" name="vote" style="display: none;"><option value="-">Sélectionner le vote</option><option value="20">Give it 1/5</option><option value="40">Give it 2/5</option><option value="60">Give it 3/5</option><option value="80">Give it 4/5</option><option value="100" selected="selected">Give it 5/5</option></select><div class="fivestar-widget clearfix fivestar-widget-5"><div class="star star-1 odd star-first on"><a href="#20" title="Give it 1/5">Give it 1/5</a></div><div class="star star-2 even on"><a href="#40" title="Give it 2/5">Give it 2/5</a></div><div class="star star-3 odd on"><a href="#60" title="Give it 3/5">Give it 3/5</a></div><div class="star star-4 even on"><a href="#80" title="Give it 4/5">Give it 4/5</a></div><div class="star star-5 odd star-last on"><a href="#100" title="Give it 5/5">Give it 5/5</a></div></div>
+            <div id="edit-vote--2--description" class="description">
+      <div class="fivestar-summary fivestar-summary-average-count">
+  
+      <span class="average-rating">
+      Average: <span>4.3</span>
+    </span>
+  
+            <span class="total-votes">
+                          (<span>3</span> votes)
+              </span>
+      </div>
+
+    </div>
+  </div>
+
+        </div>
+</div><input class="js-hide button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Taux" data-once="drupal-ajax">
+<input autocomplete="off" data-drupal-selector="form-zruvxof3jbpcyd0x5cnukhezap9f4vkurh9plxgcg3m" type="hidden" name="form_build_id" value="form-zRUVxOF3JBpcYD0x5cNUkhezAp9f4vkuRH9PlxgcG3M">
+<input data-drupal-selector="edit-fivestar-form-1" type="hidden" name="form_id" value="fivestar_form_1">
+
+</form>
+</div>
+          </div>
+
+  </div>
+
+<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+      <span class="a2a_kit a2a_kit_size_32 addtoany_list" data-a2a-url="https://www.julienkrier.fr/articles/git-cheat-sheet" data-a2a-title="Git Cheat Sheet" style="line-height: 32px;"><div class="field__label">Partagez cet article</div><a class="a2a_button_twitter" target="_blank" rel="nofollow noopener" href="https://www.julienkrier.fr/#twitter"><span class="a2a_svg a2a_s__default a2a_s_twitter" style="background-color: rgb(29, 155, 240);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M28 8.557a9.913 9.913 0 0 1-2.828.775 4.93 4.93 0 0 0 2.166-2.725 9.738 9.738 0 0 1-3.13 1.194 4.92 4.92 0 0 0-3.593-1.55 4.924 4.924 0 0 0-4.794 6.049c-4.09-.21-7.72-2.17-10.15-5.15a4.942 4.942 0 0 0-.665 2.477c0 1.71.87 3.214 2.19 4.1a4.968 4.968 0 0 1-2.23-.616v.06c0 2.39 1.7 4.38 3.952 4.83-.414.115-.85.174-1.297.174-.318 0-.626-.03-.928-.086a4.935 4.935 0 0 0 4.6 3.42 9.893 9.893 0 0 1-6.114 2.107c-.398 0-.79-.023-1.175-.068a13.953 13.953 0 0 0 7.55 2.213c9.056 0 14.01-7.507 14.01-14.013 0-.213-.005-.426-.015-.637.96-.695 1.795-1.56 2.455-2.55z"></path></svg></span><span class="a2a_label">Twitter</span></a><a class="a2a_button_facebook" target="_blank" rel="nofollow noopener" href="https://www.julienkrier.fr/#facebook"><span class="a2a_svg a2a_s__default a2a_s_facebook" style="background-color: rgb(24, 119, 242);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M17.78 27.5V17.008h3.522l.527-4.09h-4.05v-2.61c0-1.182.33-1.99 2.023-1.99h2.166V4.66c-.375-.05-1.66-.16-3.155-.16-3.123 0-5.26 1.905-5.26 5.405v3.016h-3.53v4.09h3.53V27.5h4.223z"></path></svg></span><span class="a2a_label">Facebook</span></a><a class="a2a_button_linkedin" target="_blank" rel="nofollow noopener" href="https://www.julienkrier.fr/#linkedin"><span class="a2a_svg a2a_s__default a2a_s_linkedin" style="background-color: rgb(0, 123, 181);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M6.227 12.61h4.19v13.48h-4.19V12.61zm2.095-6.7a2.43 2.43 0 0 1 0 4.86c-1.344 0-2.428-1.09-2.428-2.43s1.084-2.43 2.428-2.43m4.72 6.7h4.02v1.84h.058c.56-1.058 1.927-2.176 3.965-2.176 4.238 0 5.02 2.792 5.02 6.42v7.395h-4.183v-6.56c0-1.564-.03-3.574-2.178-3.574-2.18 0-2.514 1.7-2.514 3.46v6.668h-4.187V12.61z" fill="#FFF"></path></svg></span><span class="a2a_label">LinkedIn</span></a><a class="a2a_button_email" target="_blank" rel="nofollow noopener" href="https://www.julienkrier.fr/#email"><span class="a2a_svg a2a_s__default a2a_s_email" style="background-color: rgb(1, 102, 255);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M26 21.25v-9s-9.1 6.35-9.984 6.68C15.144 18.616 6 12.25 6 12.25v9c0 1.25.266 1.5 1.5 1.5h17c1.266 0 1.5-.22 1.5-1.5zm-.015-10.765c0-.91-.265-1.235-1.485-1.235h-17c-1.255 0-1.5.39-1.5 1.3l.015.14s9.035 6.22 10 6.56c1.02-.395 9.985-6.7 9.985-6.7l-.015-.065z"></path></svg></span><span class="a2a_label">Email</span></a></span>
+  </div>
+
+  </div>
+
+
+  </div>
+    
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+<div class="views-element-container clearfix" id="block-views-block-similar-by-terms-block-1">
+  
+      <div class="h2">Articles sur le même sujet</div>
+    
+      <div><div class="view view-similar-by-terms view-id-similar_by_terms view-display-id-block_1 js-view-dom-id-fa2147b1d3ac6028bad9b17f89b098cad786376dec1f60d9a0bd5fdfafa74e08">
+  
+    
+      
+      <div class="view-content">
+          <div class="col-md-4 col-sm-12  views-row"><div class="views-field views-field-field-vignette"><div class="field-content">  <a href="https://www.julienkrier.fr/articles/utiliser-bitbucket-pour-gerer-ses-modules-custom-drupal" hreflang="fr"><img loading="lazy" src="Git%20Cheat%20Sheet_files/bitbucket-module-custom-drupal.jpg" alt="Utiliser Bit Bucket pour gérer ses modules custom Drupal" typeof="foaf:Image" class="image-style-crop-thumbnail" width="800" height="450">
+
+</a>
+</div></div><span class="views-field views-field-title"><span class="field-content"><a href="https://www.julienkrier.fr/articles/utiliser-bitbucket-pour-gerer-ses-modules-custom-drupal" hreflang="fr">Utiliser Bitbucket pour gérer ses modules custom Drupal</a></span></span><div class="views-field views-field-field-categorie"><div class="field-content"><a href="https://www.julienkrier.fr/mots-cles/configuration-0" hreflang="fr">Configuration</a></div></div><span class="views-field views-field-field-resume-article"><span class="field-content">Pour
+ simplifier les mises à jour de ses modules custom Drupal, il est 
+préférable de les versioner. Voici comment utiliser Bit-Bucket et 
+composer pour gérer ses propres modules custom.</span></span></div>
+    <div class="col-md-4 col-sm-12  views-row"><div class="views-field views-field-field-vignette"><div class="field-content">  <a href="https://www.julienkrier.fr/articles/patcher-un-module-de-drupal" hreflang="fr"><img loading="lazy" src="Git%20Cheat%20Sheet_files/patch-drupal.png" alt="Patcher Drupal" typeof="foaf:Image" class="image-style-crop-thumbnail" width="2666" height="1500">
+
+</a>
+</div></div><span class="views-field views-field-title"><span class="field-content"><a href="https://www.julienkrier.fr/articles/patcher-un-module-de-drupal" hreflang="fr">Patcher un module de Drupal</a></span></span><div class="views-field views-field-field-categorie"><div class="field-content"><a href="https://www.julienkrier.fr/mots-cles/configuration-0" hreflang="fr">Configuration</a></div></div><span class="views-field views-field-field-resume-article"><span class="field-content">Il
+ peut arriver que sur une mise à jour par exemple on se retrouve avec un
+ bug sur un module. Des patchs peuvent alors corriger le problème.</span></span></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </div>
+
+  </div>
+
+                          </div>
+                      </section>
+                            </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+          <footer class="clearfix footer region--light-typography region--dark-background region--no-separator footer-to-top-enabled">
+              <div class="to-top"><i class="fa fa-angle-up"></i></div>
+            <div class="container">
+        <div class="clearfix footer__container">
+          <div class="row">
+                          <div class="col-sm-6 col-md-3">
+                                <div class="clearfix footer__section footer-first">
+                    <div class="region region-footer-first">
+    <div id="block-brand" class="clearfix block block-block-content block-block-content40dc7d0c-ca09-4260-8a09-9f996c25bffd">
+  
+    
+      <div class="content">
+      
+            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"><div id="block-julienk-branding" class="clearfix site-branding block block-system block-system-branding-block">
+    <div class="logo-and-site-name-wrapper clearfix">
+              <div class="site-name site-branding__name">
+        <a href="https://www.julienkrier.fr/" title="Home" rel="home">Julien Krier</a>
+      </div>
+              <div class="site-slogan site-branding__slogan">Responsable Digital</div>
+      </div>
+</div></div>
+      
+    </div>
+  </div>
+
+  </div>
+
+                </div>
+                              </div>
+                                      <div class="col-sm-6 col-md-3">
+                                <div class="clearfix footer__section footer-second">
+                    <div class="region region-footer-second">
+    <div id="block-monprofil-2" class="clearfix">
+  
+      <div class="h2-footer">Mon Profil</div>
+    
+      
+              <ul class="clearfix menu">
+                    <li class="menu-item">
+        <a href="https://www.julienkrier.fr/competences" data-drupal-link-system-path="node/77">Compétences</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.julienkrier.fr/experiences" title="Voir mes expériences" data-drupal-link-system-path="experiences">Expériences</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.julienkrier.fr/realisations" title="Voir mes réalisations" data-drupal-link-system-path="realisations">Réalisations</a>
+              </li>
+        </ul>
+  
+
+
+  </div>
+
+  </div>
+
+                </div>
+                              </div>
+                        <div class="clearfix visible-sm-block"></div>
+                          <div class="col-sm-6 col-md-3">
+                                <div class="clearfix footer__section footer-third">
+                    <div class="region region-footer-third">
+    <div id="block-blog" class="clearfix">
+  
+      <div class="h2-footer">Blog</div>
+    
+      
+              <ul class="clearfix menu">
+                    <li class="menu-item">
+        <a href="https://www.julienkrier.fr/modules-drupal" data-drupal-link-system-path="modules-drupal">Modules Drupal</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.julienkrier.fr/articles" data-drupal-link-system-path="articles">Articles</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.julienkrier.fr/memo" data-drupal-link-system-path="memo">Mémo</a>
+              </li>
+        </ul>
+  
+
+
+  </div>
+
+  </div>
+
+                </div>
+                              </div>
+                        <div class="clearfix visible-xs-block visible-xs-block"></div>
+                                      <div class="col-sm-6 col-md-3">
+                                <div class="clearfix footer__section footer-fifth">
+                    <div class="region region-footer-fifth">
+    <div id="block-julienk-footer" class="clearfix">
+  
+      <div class="h2-footer">Liens utiles</div>
+    
+      
+              <ul class="clearfix menu">
+                    <li class="menu-item">
+        <a href="https://www.julienkrier.fr/contact" title="Contactez-moi!" data-drupal-link-system-path="webform/contact">Contact</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.julienkrier.fr/user/login" title="Se connecter" data-drupal-link-system-path="user/login">Se connecter</a>
+              </li>
+                <li class="menu-item">
+        <a href="https://www.julienkrier.fr/recherche" title="Recherchez un article" data-drupal-link-system-path="recherche">Recherche</a>
+              </li>
+        </ul>
+  
+
+
+  </div>
+
+  </div>
+
+                </div>
+                              </div>
+                      </div>
+        </div>
+      </div>
+    </footer>
+      
+  
+          <div class="clearfix subfooter region--light-typography region--dark-background region--no-separator footer-to-top-enabled">
+            <div class="container">
+                <div class="clearfix subfooter__container">
+          <div class="row">
+                          <div class="col-md-12 text-center">
+                                <div class="clearfix subfooter__section subfooter-first">
+                    <div class="region region-sub-footer-first">
+    <div id="block-reseauxsociaux" class="clearfix block block-block-content block-block-contentae354c52-1be9-4848-a829-55ce633a7c63">
+  
+    
+      <div class="content">
+      
+            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"><ul class="icons-list icons-list--large"><li><a href="https://www.julienkrier.fr/contact"><i class="fa fa-envelope-o" title="Contactez-moi!"><span class="sr-only">contact</span></i> </a></li>
+	<li><a href="https://www.linkedin.com/in/krierjulien/" target="_blank" title="Rejoignez-moi sur LinkedIn"><i class="fa fa-linkedin"><span class="sr-only">linkedin</span></i> </a></li>
+	<li><a href="https://twitter.com/julienkrier" target="_blank" title="Rejoignez-moi sur Twitter"><i class="fa fa-twitter"><span class="sr-only">twitter</span></i> </a></li>
+</ul></div>
+      
+    </div>
+  </div>
+
+  </div>
+
+                </div>
+                              </div>
+                                  </div>
+        </div>
+              </div>
+    </div>
+      
+</div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/12","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"fr"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"addtoany\/addtoany.front,ajax_loader\/ajax_loader.throbber,classy\/base,classy\/messages,classy\/node,codesnippet\/codesnippet.highlightjs,codesnippet\/codesnippet.style.github,core\/internal.jquery.form,core\/normalize,fivestar\/fivestar.base,fivestar\/oxygen,google_analytics\/google_analytics,julienk\/global-styling,julienk\/init,julienk\/smooth-scroll,paragraphs\/drupal.paragraphs.unpublished,showcase_lite\/background-image-block,showcase_lite\/bootstrap-cdn,showcase_lite\/breadcrumb,showcase_lite\/color-gray,showcase_lite\/fixed-header,showcase_lite\/fontawesome,showcase_lite\/fonts-id-06,showcase_lite\/fonts-id-08,showcase_lite\/fonts-pt-serif,showcase_lite\/fonts-sourcecodepro,showcase_lite\/global-styling,showcase_lite\/local-stylesheets,showcase_lite\/messages,showcase_lite\/node,showcase_lite\/node-article,showcase_lite\/smooth-scroll,showcase_lite\/to-top,superfish\/superfish,superfish\/superfish_hoverintent,superfish\/superfish_smallscreen,superfish\/superfish_supersubs,superfish\/superfish_supposition,system\/base,views\/views.module","theme":"julienk","theme_token":null},"ajaxTrustedUrl":{"form_action_p_pvdeGsVG5zNF_XLGPTvYSKCf43t8qZYSwcfZl2uzM":true,"\/articles\/git-cheat-sheet?ajax_form=1":true},"ajaxLoader":{"markup":"\u003Cdiv class=\u0022ajax-throbber sk-flow\u0022\u003E\n              \u003Cdiv class=\u0022sk-flow-dot\u0022\u003E\u003C\/div\u003E\n              \u003Cdiv class=\u0022sk-flow-dot\u0022\u003E\u003C\/div\u003E\n              \u003Cdiv class=\u0022sk-flow-dot\u0022\u003E\u003C\/div\u003E\n            \u003C\/div\u003E","hideAjaxMessage":false,"alwaysFullscreen":false,"throbberPosition":"body"},"google_analytics":{"account":"UA-40909700-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"showcase_lite":{"flexsliderInPageInit":{"inPageSliderEffect":"slide"},"slideoutInit":{"slideoutSide":"left","slideoutTouchSwipe":true}},"field_group":{"html_element":{"mode":"default","context":"view","settings":{"classes":"col-md-7 col-lg-8","id":"","element":"div","show_label":false,"label_element":"h3","label_element_classes":"","attributes":"","effect":"none","speed":"fast"}}},"ajax":{"edit-submit":{"event":"click","callback":"::fivestarAjaxVote","method":"replaceWith","wrapper":"vote","effect":"fade","url":"\/articles\/git-cheat-sheet?ajax_form=1","dialogType":"ajax","submit":{"_triggering_element_name":"op","_triggering_element_value":"Taux"}}},"superfish":{"superfish-main":{"id":"superfish-main","sf":{"animation":{"opacity":"show","height":"show"},"speed":"fast"},"plugins":{"smallscreen":{"mode":"window_width","breakpoint":991,"expandText":"D\u00e9plier","collapseText":"Replier","title":"Main navigation"},"supposition":true,"supersubs":true}}},"user":{"uid":0,"permissionsHash":"6a83ffc2b555677fb155f4e735dd12dd2a0dfd75ed68b1df21008defb83e7873"}}</script>
+<script src="Git%20Cheat%20Sheet_files/js_JDeipEmuGIB2LFlRqHBtPVaVlWjEJN1uTsYhEBsstC8.js"></script>
+<script src="Git%20Cheat%20Sheet_files/page.js" async=""></script>
+<script src="Git%20Cheat%20Sheet_files/js_mcdZ0YSVp7sUqOsmYswT1UCC5RgxtnRj84uceCZSjaE.js"></script>
+<script src="Git%20Cheat%20Sheet_files/f479fb1064.js"></script>
+<script src="Git%20Cheat%20Sheet_files/js_VZdaO3wgEHyFUrneHosvEsnDfdGaWxIZZZccKDvEhqM.js"></script>
+<script src="Git%20Cheat%20Sheet_files/bootstrap.min.js"></script>
+<script src="Git%20Cheat%20Sheet_files/js_DBPWp2LpRKc2tQlDyoM8On27evdthiuOEizFVEvWMMU.js"></script><div style="position: static;"><div class="a2a_overlay" id="a2a_overlay"></div><div id="a2a_modal" class="a2a_modal a2a_hide" role="dialog" tabindex="-1" aria-label=""><div class="a2a_modal_body a2a_menu a2a_hide" id="a2a_copy_link"><span id="a2a_copy_link_icon" class="a2a_svg a2a_s_link a2a_logo_color"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M24.4 21.18c0-.36-.1-.67-.36-.92l-2.8-2.8a1.24 1.24 0 0 0-.92-.38c-.38 0-.7.14-.97.43.02.04.1.12.25.26l.3.3.2.24c.08.12.14.24.17.35.03.1.05.23.05.37 0 .36-.13.66-.38.92a1.25 1.25 0 0 1-.92.37 1.4 1.4 0 0 1-.37-.03 1.06 1.06 0 0 1-.35-.18 2.27 2.27 0 0 1-.25-.2 6.82 6.82 0 0 1-.3-.3l-.24-.25c-.3.28-.44.6-.44.98 0 .36.13.66.38.92l2.78 2.8c.24.23.54.35.9.35.37 0 .68-.12.93-.35l1.98-1.97c.26-.25.38-.55.38-.9zm-9.46-9.5c0-.37-.13-.67-.38-.92l-2.78-2.8a1.24 1.24 0 0 0-.9-.37c-.36 0-.67.1-.93.35L7.97 9.92c-.26.25-.38.55-.38.9 0 .36.1.67.37.92l2.8 2.8c.24.25.55.37.92.37.36 0 .7-.13.96-.4-.03-.04-.1-.12-.26-.26s-.24-.23-.3-.3a2.67 2.67 0 0 1-.2-.24 1.05 1.05 0 0 1-.17-.35 1.4 1.4 0 0 1-.04-.37c0-.36.1-.66.36-.9.26-.26.56-.4.92-.4.14 0 .26.03.37.06.12.03.23.1.35.17.1.1.2.16.25.2l.3.3.24.26c.3-.28.44-.6.44-.98zM27 21.17c0 1.07-.38 2-1.15 2.73l-1.98 1.98c-.74.75-1.66 1.12-2.73 1.12-1.1 0-2-.38-2.75-1.14l-2.8-2.8c-.74-.74-1.1-1.65-1.1-2.73 0-1.1.38-2.04 1.17-2.82l-1.18-1.17c-.8.8-1.72 1.18-2.82 1.18-1.08 0-2-.36-2.75-1.12l-2.8-2.8C5.38 12.8 5 11.9 5 10.82c0-1.08.38-2 1.15-2.74L8.13 6.1C8.87 5.37 9.78 5 10.86 5c1.1 0 2 .38 2.75 1.15l2.8 2.8c.74.73 1.1 1.65 1.1 2.72 0 1.1-.38 2.05-1.17 2.82l1.18 1.18c.8-.8 1.72-1.2 2.82-1.2 1.08 0 2 .4 2.75 1.14l2.8 2.8c.76.76 1.13 1.68 1.13 2.76z"></path></svg></span><input id="a2a_copy_link_text" type="text" title="Copy link" readonly="readonly"><div id="a2a_copy_link_copied">✓</div></div><div class="a2a_modal_body a2a_menu a2a_thanks a2a_hide" id="a2a_thanks"><div class="a2a_localize" data-a2a-localize="inner,ThanksForSharing">Thanks for sharing!</div></div></div><div class="a2a_menu a2a_full a2a_localize" id="a2apage_full" role="dialog" tabindex="-1" aria-label="Share" data-a2a-localize="title,Share"><div class="a2a_full_header"><div id="a2apage_find_container" class="a2a_menu_find_container"><input id="a2apage_find" class="a2a_menu_find a2a_localize" type="text" autocomplete="off" title="Find any service" data-a2a-localize="title,FindAnyServiceToAddTo"><span id="a2apage_find_icon" class="a2a_svg a2a_s_find"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#CCC" d="M19.7 18.2l-4.5-4.5c.7-1.1 1.2-2.3 1.2-3.6 0-3.5-2.8-6.3-6.3-6.3s-6.3 2.8-6.3 6.3 2.8 6.3 6.3 6.3c1.4 0 2.6-.4 3.6-1.2l4.5 4.5c.6.6 1.3.7 1.7.2.5-.4.4-1.1-.2-1.7zm-9.6-3.6c-2.5 0-4.5-2.1-4.5-4.5 0-2.5 2.1-4.5 4.5-4.5 2.5 0 4.5 2.1 4.5 4.5s-2 4.5-4.5 4.5z"></path></svg></span></div></div><div class="a2a_full_services" id="a2apage_full_services" role="presentation"></div><div class="a2a_full_footer"><a href="https://www.addtoany.com/" title="Share Buttons" rel="noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_a2a a2a_logo_color"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span>AddToAny</a></div></div><div id="a2apage_dropdown" class="a2a_menu a2a_mini a2a_localize a2a_hide" tabindex="-1" aria-label="Share" data-a2a-localize="label,Share"><div class="a2a_mini_services" id="a2apage_mini_services"></div><div id="a2apage_cols_container" class="a2a_cols_container"><div class="a2a_col1" id="a2apage_col1"></div><div id="a2apage_2_col1" class="a2a_hide"></div><div class="a2a_clear"></div></div><div class="a2apage_wide a2a_wide"><a href="#addtoany" id="a2apage_show_more_less" class="a2a_more a2a_localize" title="Show all" data-a2a-localize="title,ShowAll"><span class="a2a_svg a2a_s__default a2a_s_a2a a2a_logo_color"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span><span class="a2a_localize" data-a2a-localize="inner,More">More…</span></a></div></div><div style="height: 1px; width: 1px; position: absolute; z-index: 100000; top: 0px; visibility: hidden;"><iframe id="a2a_sm_ifr" style="height: 1px; width: 1px; border: 0px none; left: 0px; top: 0px; position: absolute; z-index: 100000; display: none;" title="AddToAny Utility Frame" transparency="true" allowtransparency="true" src="Git%20Cheat%20Sheet_files/sm.htm" frameborder="0"></iframe></div></div>
+
+  
+
+</body></html>
